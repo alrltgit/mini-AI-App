@@ -11,15 +11,35 @@ body {
     height: 30vh;
     width: 80vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    border-color: #000000;
     font-size: 20px;
-    padding: 10px;
 }
 
 #response {
-    font-size: 20px;
+    font-size: 25px;
     background-color: #ffffff;
+    border: thick solid #233142;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+#back-btn {
+    height: 40px;
+    width: 120px;
+    font-size: 20px;
+    font-family: Monaco, monospace;
+    border-radius: 5px;
+    background-color: #455d7a;
+    color: #e3e3e3;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#back-btn:hover {
+    height: 45px;
+    width: 125px;
+    border-color: #455d7a;
 }

@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template, g
 from google import genai
 import sqlite3
+from create_db import create_database
+import os
 
 app = Flask(__name__)
 client = genai.Client()
@@ -16,8 +18,9 @@ def generate():
         model = 'gemini-2.5-flash',
         contents = prompt
     )
+    if not os.path.isfile('/Users/apple/PycharmProjects/mini-AI-App/data.db'):
+        create_database()
     db = get_db()
-    # cursor = db.cursor()
     db.execute('insert into data (PROMPT, REPLY) values (?,?)', (prompt, response.text))
     db.commit()
 
@@ -27,10 +30,10 @@ def generate():
         print (row)
     reply = response.text
     return render_template('response.html', response = reply)
-    # return response.text
 
 def get_db():
     db = getattr(g, '_database', None)
+    # print("db: ", db)
     if db is None:
         db = g._database = sqlite3.connect('data.db')
     return db
