@@ -23,6 +23,10 @@ def generate():
     db = get_db()
     db.execute('insert into data (PROMPT, REPLY) values (?,?)', (prompt, response.text))
     db.commit()
+    # print db
+    # rows = db.execute('select * from data')
+    # for row in rows:
+    #    print (row)
     reply = response.text
     return render_template('response.html', response = reply)
 
