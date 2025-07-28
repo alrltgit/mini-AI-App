@@ -23,17 +23,11 @@ def generate():
     db = get_db()
     db.execute('insert into data (PROMPT, REPLY) values (?,?)', (prompt, response.text))
     db.commit()
-
-    # print the db content
-    rows = db.execute('select * from data')
-    for row in rows:
-        print (row)
     reply = response.text
     return render_template('response.html', response = reply)
 
 def get_db():
     db = getattr(g, '_database', None)
-    # print("db: ", db)
     if db is None:
         db = g._database = sqlite3.connect('data.db')
     return db
