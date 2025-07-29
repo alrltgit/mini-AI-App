@@ -3,6 +3,9 @@ from google.genai import errors
 import os
 from manage_db import create_database, get_db
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Gets the current file's directory
+DB_PATH = os.path.join(BASE_DIR, 'data.db')
+
 def send_api_request(prompt, client):
     try:
         response = client.models.generate_content(
@@ -14,7 +17,7 @@ def send_api_request(prompt, client):
     return response
 
 def add_data_to_database(prompt, response):
-    if not os.path.isfile('/Users/apple/PycharmProjects/mini-AI-App/data.db'):
+    if not os.path.isfile(DB_PATH):
         create_database()
     db = get_db()
     db.execute('insert into data (PROMPT, REPLY) values (?,?)', (prompt, response.text))
