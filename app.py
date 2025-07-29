@@ -2,9 +2,12 @@ from flask import Flask, request, render_template, g, session
 from google import genai
 from utils import send_api_request, add_data_to_database, create_session
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 app = Flask(__name__)
 client = genai.Client()
-app.secret_key = os.environ.get('session_secret_key')
+app.secret_key = os.environ.get('SESSION_SECRET_KEY')
 @app.route('/')
 def index():
     session.clear()
