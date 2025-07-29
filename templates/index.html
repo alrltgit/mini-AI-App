@@ -9,33 +9,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-<header>
-    <h1>Mini AI App</h1>
-</header>
+    <header>
+        <h1>Mini AI App</h1>
+    </header>
     <div id="main">
-        {% if chat %}
-            {% for pair in chat %}
-                <div id="prompt-field">
-                    <p id="prompt">{{ pair.prompt }}</p><br>
-                </div>
-                <div id="response-field">
-                        <p id="response">{{ pair.reply }}</p>
-                </div>
-            {% endfor %}
-            <form action="/generate" method="post" id="input-form">
-                <label for="input-field">
-                    <input type="text" name="prompt" id="input-field" placeholder="Ask me anything..." required><br>
-                </label>
-                <button type="submit" value="Generate" id="generate">Send</button>
-            </form>
-        {% else %}
-            <form action="/generate" method="post" id="input-form">
-                <label for="input-field">
-                    <input type="text" name="prompt" id="input-field" placeholder="Ask me anything..." required><br>
-                </label>
-                <button type="submit" value="Generate" id="generate">Send</button>
-            </form>
-        {% endif %}
+        <div id="chat-window">
+            {% if chat %}
+                {% for pair in chat %}
+                    <div class="chat-entry">
+                        <div class="prompt-bubble">{{ pair.prompt }}</div>
+                        <div class="reply-bubble">{{ pair.reply }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div id="input-area">
+        <form action="/generate" method="post" id="input-form">
+                <input type="text" name="prompt" id="input-field" placeholder="Ask me anything..." required>
+            <button type="submit" value="Generate" id="generate">Send</button>
+        </form>
+        <form action="/clear" method="post" id="clear-form">
+            <button type="submit" id="clear-button">Clear chat</button>
+        </form>
     </div>
 </body>
 </html>

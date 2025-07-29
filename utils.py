@@ -1,0 +1,31 @@
+from flask import session
+from google.genai import errors
+import os
+from create_db import create_database, get_db
+
+def send_api_request(prompt, client):
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt
+        )
+    except errors.APIError as e:
+        response = f"Error: {e}"
+    return response
+
+def add_data_to_database(prompt, response):
+    if not os.path.isfile('/Users/apple/PycharmProjects/mini-AI-App/data.db'):
+        create_database()
+    db = get_db()
+    db.execute('insert into data (PROMPT, REPLY) values (?,?)', (prompt, response.text))
+    db.commit()
+    # print db
+    # rows = db.execute('select * from data')
+    # for row in rows:
+    #    print (row)
+
+def create_session(prompt, response):
+    if 'chat' not in session:
+        session['chat'] = []
+    session['chat'].append({'prompt': prompt, 'reply': response.text})
+    session.modified = True
