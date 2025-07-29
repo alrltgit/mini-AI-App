@@ -1,6 +1,6 @@
 Mini AI Chat App
 
-A lightweight web application built with Flask and Google Gemini API that lets users chat with an AI assistant. The app uses session storage to maintain chat history and saves all interactions to a local SQLite database.
+A web application built with Flask and Google Gemini API that lets users chat with an AI assistant. The app uses session storage to maintain chat history and saves all interactions to a local SQLite database.
 
 🖥️ Tech Stack
 
