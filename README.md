@@ -12,4 +12,4 @@ Jinja2 – for dynamic rendering
 
 SQLite – local data storage
 
-Google Generative AI – for responses
+Gemini API – for responses
